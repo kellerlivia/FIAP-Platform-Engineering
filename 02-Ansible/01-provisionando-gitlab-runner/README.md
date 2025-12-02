@@ -32,11 +32,15 @@ source ~/venv/bin/activate
     ssh-keygen -t rsa -b 2048 -C "gitlab key" -f /home/vscode/.ssh/gitlab
    ```
    2. Pressione enter duas vezes para sinalizar que não quer senha para a chave
+   
    ![](img/gitlab-1.png)
+   
    3. Abre a parte publica da sua chave no IDE do Codespaces com o comando `code /home/vscode/.ssh/gitlab.pub` e copie o conteúdo para a área de transferência do seu computador.
    4. Acesse o link da configuração de chaves do seu gitlab: [Chaves Gitlab](https://gitlab.com/-/user_settings/ssh_keys)
    5. Cole o conteúdo copiado no campo destacado e clique em `Add New Key`
+   
    ![](img/gitlab-2.png)
+
    6. Devolta ao terminal do Codespaces exetuce os comandos abaixo para ativar a chave na sessão de terminal que esta utilizando:
    ```shell
     eval $(ssh-agent -s) 
@@ -44,7 +48,9 @@ source ~/venv/bin/activate
    ```
 6. Vamos criar um primeiro projeto no gitlab. Para isso acesse o [link](https://gitlab.com/projects/new). Clique em `Create Blank Projet`.
 7. De o nome de `primeiro-projeto` ao projeto. Marque como `Public` e desmarque a opção de inicializar com README. 
+   
    ![](img/gitlab-3.png)
+
 8. Clique em `Create project`
 9. De volta ao Codespaces você vai subir o código desse primeiro projeto no gitlab. Para isso siga os comandos abaixo tomando o cuidado com os pontos onde precisa colocar suas informações
 ```bash
@@ -52,15 +58,16 @@ git config --global user.name "SEU NOME"
 git config --global user.email "SEU EMAIL DO GITLAB"
 
 #Copia o código para outra pasta para que possa criar outro repo git
-cp -frv /home/ubuntu/environment/FIAP-CICD-DevSecOps/02-Ansible/01-provisionando-gitlab-runner/primeiro-projeto/ ~/environment/
+cp -frv /workspaces/FIAP-Platform-Engineering/02-Ansible/01-provisionando-gitlab-runner/primeiro-projeto/ ~/environment/
 
-cd /home/ubuntu/environment/primeiro-projeto
+cd /home/vscode/environment/primeiro-projeto
 
 git init
 git remote add origin git@gitlab.com:SEU-USUARIO/primeiro-projeto.git
 git add .
 git commit -m "Initial commit"
-git push -u origin master
+git branch -M master
+git push -uf origin master
 ```
 ![](img/gitlab-4.png)
 ![](img/gitlab-5.png)
